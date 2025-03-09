@@ -4,18 +4,22 @@ import {
   YEARS,
   SEASONS
 } from '@/utils/constants';
-import { useSearchFilters } from '@/hooks/useFilters';
+import { useSearchFilters } from '@/hooks/useSearchFilters';
 import UISelect from './UISelect';
 import { useSelector } from 'react-redux';
+import { useCallback } from 'react';
 import { RootState } from '@/redux/store';
-
 
 export default function FiltersBar() {
   const filters = useSelector((state: RootState) => state.anime.filters);
   const { updateFilter } = useSearchFilters();
 
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    updateFilter('searchTerm', e.target.value);
+  }, [updateFilter]);
+
   return (
-    <div className="my-8">
+    <div className="mt-24 mb-8">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <div>
           <label htmlFor="searchTerm" className="block text-sm font-bold mb-1">
@@ -27,7 +31,7 @@ export default function FiltersBar() {
               type="text"
               placeholder="Search"
               value={filters.searchTerm}
-              onChange={(e) => updateFilter('searchTerm', e.target.value)}
+              onChange={handleSearchChange}
               className="bg-white text-sm w-full p-2 pl-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"
             />
             <svg

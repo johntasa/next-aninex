@@ -35,17 +35,20 @@ export const GENRES = [
 
 export const YEARS = Array.from({ length: 30 }, (_, i) => (new Date().getFullYear() - i).toString());
 
-export const STATUSES = [
-  "FINISHED",
-  "RELEASING",
-  "NOT_YET_RELEASED",
-  "CANCELLED",
-  "HIATUS"
-];
+export enum Status {
+  FINISHED = "FINISHED",
+  RELEASING = "RELEASING",
+  NOT_YET_RELEASED = "NOT_YET_RELEASED",
+  CANCELLED = "CANCELLED",
+  HIATUS = "HIATUS"
+}
 
-export const SEASONS = [
-  "WINTER",
-  "SPRING",
-  "SUMMER",
-  "FALL"
-];
+export enum Season {
+  WINTER = "WINTER",
+  SPRING = "SPRING",
+  SUMMER = "SUMMER",
+  FALL = "FALL"
+}
+
+export const STATUSES = Object.values(Status);
+export const SEASONS = Object.values(Season);

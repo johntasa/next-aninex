@@ -5,8 +5,9 @@ import { AnimeCardProps } from '@/interfaces/Anime';
 import { useDispatch } from 'react-redux';
 import { setSelectedAnime } from '@/redux/animeSlice';
 import FavButton from '@/components/UI/FavButton';
+import { memo } from 'react';
 
-export default function AnimeCard ({ animeInfo }: AnimeCardProps) {
+const AnimeCard = memo(function AnimeCard({ animeInfo }: AnimeCardProps) {
   const dispatch = useDispatch();
   return (
     <div className="w-full p-2">
@@ -16,6 +17,7 @@ export default function AnimeCard ({ animeInfo }: AnimeCardProps) {
           alt={animeInfo.title.english || "Cover image of anime"}
           fill
           priority
+          loading="lazy"
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="object-cover rounded-lg shadow-teal-500 shadow-lg hover:blur-sm transition-all duration-300 cursor-pointer"
           onClick={() => dispatch(setSelectedAnime(animeInfo))}
@@ -29,4 +31,6 @@ export default function AnimeCard ({ animeInfo }: AnimeCardProps) {
       </div>
     </div>
   );
-};
+});
+
+export default AnimeCard;

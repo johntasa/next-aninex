@@ -1,4 +1,4 @@
-import { useSearchFilters } from "@/hooks/useFilters";
+import { useSearchFilters } from "@/hooks/useSearchFilters";
 import { SearchFilters, SelectProps } from "@/interfaces/Filters";
 import { formatText } from "@/utils/utils";
 

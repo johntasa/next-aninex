@@ -10,8 +10,9 @@ interface AnimeState {
   filteredAnimes: Anime[];
   loading: boolean;
   error: string | null;
-  noResults: boolean;
+  hasResults: boolean;
   pageInfo: PageInfo;
+  currentPage: number;
 }
 
 const emptyState: AnimeState = {
@@ -27,15 +28,16 @@ const emptyState: AnimeState = {
   filteredAnimes: [],
   loading: false,
   error: null,
-  noResults: false,
+  hasResults: false,
   pageInfo: {
     total: 0,
-    perPage: 0,
-    currentPage: 0,
+    perPage: 20,
+    currentPage: 1,
     lastPage: 0,
     hasNextPage: false,
     __typename: 'PageInfo'
-  }
+  },
+  currentPage: 1,
 };
 
 const loadState = (): AnimeState => {
@@ -85,34 +87,35 @@ const animeSlice = createSlice({
     setSelectedAnime: (state, action: PayloadAction<Anime | null>) => {
       state.selectedAnime = action.payload;
     },
-    setFilters: (state, action: PayloadAction<{ [key: string]: string }>) => {
+    setFilters: (state, action: PayloadAction<Partial<SearchFilters>>) => {
       state.filters = {
-        searchTerm: action.payload.searchTerm || '',
-        genre: action.payload.genre || '',
-        year: action.payload.year || '',
-        status: action.payload.status || '',
-        season: action.payload.season || ''
+        ...state.filters,
+        ...action.payload,
       };
     },
     setAnimeList: (state, action: PayloadAction<Anime[]>) => {
       if (JSON.stringify(state.filteredAnimes) !== JSON.stringify(action.payload)) {
         state.filteredAnimes = action.payload;
-        state.noResults = action.payload.length === 0;
+        state.hasResults = action.payload.length !== 0;
+        state.loading = false;
       }
     },
     setPageInfo: (state, action: PayloadAction<PageInfo>) => {
       state.pageInfo = action.payload;
-      state.noResults = action.payload.total === 0;
+      state.hasResults = action.payload.total !== 0;
     },
-    setNoResults: (state, action: PayloadAction<boolean>) => {
-      state.noResults = action.payload;
+    setHasResults: (state, action: PayloadAction<boolean>) => {
+      state.hasResults = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
-    }
+    },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
@@ -123,8 +126,9 @@ export const {
   setFilters,
   setAnimeList,
   setPageInfo,
-  setNoResults,
+  setHasResults,
   setLoading,
-  setError 
+  setError,
+  setCurrentPage,
 } = animeSlice.actions;
 export default animeSlice.reducer;
