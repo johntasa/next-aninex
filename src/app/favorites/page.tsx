@@ -2,7 +2,7 @@
 
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import AnimeCard from "@/components/AnimeCard";
+import AnimeCard from "@/components/UI/AnimeCard";
 import AnimeModal from "@/components/Modal/AnimeModal";
 import NoResults from "@/components/UI/NoResultsMessage";
 

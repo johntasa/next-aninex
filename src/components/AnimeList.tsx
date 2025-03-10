@@ -2,11 +2,11 @@
 
 import { useLazyQuery } from '@apollo/client';
 import { GET_TOP_ANIMES } from '@/api/queries';
-import AnimeCard from './AnimeCard';
 import { Anime } from '@/interfaces/Anime';
-import Loader from './UI/Loader';
 import { useSearchFilters } from '@/hooks/useSearchFilters';
 import { useEffect } from 'react';
+import AnimeCard from './UI/AnimeCard';
+import Loader from './UI/Loader';
 
 export default function AnimeList() {
   const { hasActiveFilters } = useSearchFilters();

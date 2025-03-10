@@ -97,6 +97,7 @@ const animeSlice = createSlice({
       if (JSON.stringify(state.filteredAnimes) !== JSON.stringify(action.payload)) {
         state.filteredAnimes = action.payload;
         state.hasResults = action.payload.length !== 0;
+        state.loading = false;
       }
     },
     setPageInfo: (state, action: PayloadAction<PageInfo>) => {

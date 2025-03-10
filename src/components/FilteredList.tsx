@@ -1,7 +1,7 @@
 'use client';
 
 import { useDispatch, useSelector } from 'react-redux';
-import AnimeCard from './AnimeCard';
+import AnimeCard from './UI/AnimeCard';
 import { Anime } from '@/interfaces/Anime';
 import { RootState } from '@/redux/store';
 import CrossButton from './UI/CrossButton';
@@ -30,10 +30,10 @@ export default function FilteredList() {
     dispatch(
       setFilters({
         searchTerm: '',
-        year: 'Any',
-        genre: 'Any',
-        status: 'Any',
-        season: 'Any',
+        year: '',
+        genre: '',
+        status: '',
+        season: '',
       })
     );
   };

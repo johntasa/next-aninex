@@ -46,18 +46,17 @@ export function useSearchFilters() {
     onCompleted: (data) => {
       dispatch(setAnimeList(data.Page.media));
       dispatch(setPageInfo(data.Page.pageInfo));
-      dispatch(setLoading(false));
     },
     onError: (error) => {
       dispatch(setError(error.message));
       dispatch(setAnimeList([]));
-      dispatch(setLoading(false));
     }
   });
 
   const updateFilter = useCallback((key: keyof SearchFilters, value: string) => {
+    const filterValue = value === 'Any' ? '' : value;
     dispatch(setLoading(true));
-    dispatch(setFilters({ ...filters, [key]: value }));
+    dispatch(setFilters({ ...filters, [key]: filterValue }));
     dispatch(setCurrentPage(1));
     dispatch(setAnimeList([]));
   }, [filters, dispatch]);
