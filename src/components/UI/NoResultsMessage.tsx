@@ -5,8 +5,8 @@ export default function NoResults({message}: {message: string}) {
     <div className="text-center h-vh flex flex-col justify-center items-center">
       <Image
         src="/NoResults.png"
-        width={200}
-        height={200}
+        width={100}
+        height={100}
         alt="No results image"
         priority
         className="mt-40 w-auto h-auto"
