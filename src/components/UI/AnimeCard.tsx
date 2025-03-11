@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { AnimeCardProps } from '@/interfaces/Anime';
 import { useDispatch } from 'react-redux';
 import { setSelectedAnime } from '@/redux/animeSlice';
-import FavButton from '@/components/UI/FavButton';
+import FavButton from '@/components/UI/SetFavButton';
 import { memo } from 'react';
 
 const AnimeCard = memo(function AnimeCard({ animeInfo }: AnimeCardProps) {
@@ -16,7 +16,6 @@ const AnimeCard = memo(function AnimeCard({ animeInfo }: AnimeCardProps) {
           src={animeInfo.coverImage.large}
           alt={animeInfo.title.english || "Cover image of anime"}
           fill
-          priority
           loading="lazy"
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="object-cover rounded-lg shadow-teal-500 shadow-lg hover:blur-sm transition-all duration-300 cursor-pointer"

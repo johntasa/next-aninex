@@ -7,6 +7,7 @@ import TopAnimes from '@/components/TopAnimes';
 import AnimeModal from '@/components/Modal/AnimeModal';
 import FilteredAnimes from '@/components/FilteredAnimes';
 import Loader from '@/components/UI/Loader';
+import GoToFavsButton from '@/components/UI/GoToFavsButton';
 
 function HomeContent() {
   const { selectedAnime, loading, error, filteredAnimes } = useSelector((state: RootState) => state.anime);
@@ -33,6 +34,7 @@ function HomeContent() {
         {renderContent()}
       </div>
       {selectedAnime && <AnimeModal />}
+      <GoToFavsButton />
     </>
   );
 }
