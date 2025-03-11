@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ANINEX
+
+A modern web application for browsing and managing your favorite anime, built with Next.js and Redux.
+
+#### *Deployed on Vercel:* **[ANINEX](https://next-aninex.vercel.app/)**
+
+## Features
+
+- Browse seasonal and popular anime
+- Search anime with multiple filters:
+  - Title
+  - Genre
+  - Year
+  - Status
+  - Season
+- View detailed anime information
+- Save favorite anime
+- Responsive design for all devices
+- Modern UI with Tailwind CSS
+
+## Tech Stack
+
+- **Framework:** Next.js 15.2
+- **Language:** TypeScript
+- **State Management:** Redux Toolkit
+- **Styling:** Tailwind CSS
+- **Data Fetching:** Apollo Client with GraphQL
+- **Testing:** Jest & React Testing Library
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/johntasa/next-aninex.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Run the development server:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open your browser and navigate to 'http://localhost:3000'
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Available Scripts
+- ```pnpm dev``` - Start development server with Turbopack
+- ```pnpm build``` - Build the application for production
+- ```pnpm start``` - Start production server
+- ```pnpm lint``` - Run ESLint
+- ```pnpm test``` - Run tests
+- ```pnpm test:watch``` - Run tests in watch mode
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```plaintext
+src/
+├── api/          # API related code
+├── app/          # Next.js app router pages
+├── components/   # React components
+├── hooks/        # Custom React hooks
+├── interfaces/   # TypeScript interfaces
+├── redux/        # Redux store and slices
+└── utils/        # Utility functions and constants
+ ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Testing
+The project uses Jest and React Testing Library for unit testing, and Playwright for end-to-end testing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Unit Tests
+Unit tests are located next to their corresponding components with the .test.tsx extension.
+
+To run unit tests:
+
+```bash
+pnpm test
+ ```
+
+### End-to-End Tests
+End-to-end tests are located in the e2e directory and use Playwright.
+
+- To run e2e tests:
+
+```bash
+pnpm e2e
+ ```
+
+- To run e2e tests with UI:
+
+```bash
+pnpm e2e:ui
+ ```
+
+- To view the last test report:
+
+```bash
+pnpm e2e:report
+ ```

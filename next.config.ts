@@ -1,5 +1,11 @@
 module.exports = {
   images: {
-    domains: ['s4.anilist.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 's4.anilist.co',
+        pathname: '/**',
+      }
+    ],
   },
 };

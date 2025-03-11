@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ApolloProvider } from '@apollo/client';
 import client from '@/api/apolloClient';
@@ -16,6 +16,10 @@ const montserrat = Montserrat({
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
   return (
     <html lang="en">
+      <head>
+        <title>ANINEX</title>
+        <meta name="description" content="A modern web application for browsing and managing your favorite anime" />
+      </head>
       <body className={`${montserrat.className} antialiased`}>
         <ApolloProvider client={client}>
           <Provider store={store}>

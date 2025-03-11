@@ -1,13 +1,10 @@
-'use client';
+import Image from "next/image";
+import { AnimeCardProps } from "@/interfaces/Anime";
+import { useDispatch } from "react-redux";
+import { setSelectedAnime } from "@/redux/animeSlice";
+import FavButton from "@/components/UI/SetFavButton";
 
-import Image from 'next/image';
-import { AnimeCardProps } from '@/interfaces/Anime';
-import { useDispatch } from 'react-redux';
-import { setSelectedAnime } from '@/redux/animeSlice';
-import FavButton from '@/components/UI/SetFavButton';
-import { memo } from 'react';
-
-const AnimeCard = memo(function AnimeCard({ animeInfo }: AnimeCardProps) {
+export default function AnimeCard({ animeInfo }: AnimeCardProps) {
   const dispatch = useDispatch();
   return (
     <div className="w-full p-2">
@@ -30,6 +27,4 @@ const AnimeCard = memo(function AnimeCard({ animeInfo }: AnimeCardProps) {
       </div>
     </div>
   );
-});
-
-export default AnimeCard;
+}

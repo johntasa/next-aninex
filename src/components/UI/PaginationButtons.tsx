@@ -1,5 +1,5 @@
 import { useSearchFilters } from "@/hooks/useSearchFilters";
-import { PageInfo } from '@/interfaces/PageInfo';
+import { PageInfo } from "@/interfaces/PageInfo";
 
 export default function Pagination(pageInfo: PageInfo) {
   const { setPage } = useSearchFilters();
@@ -11,7 +11,7 @@ export default function Pagination(pageInfo: PageInfo) {
         disabled={pageInfo.currentPage === 1}
         className={
           `min-w-24 px-4 py-2 bg-teal-700 text-white rounded-lg disabled:opacity-50  transition-colors ${
-            pageInfo.currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-teal-600 cursor-pointer'
+            pageInfo.currentPage === 1 ? "cursor-not-allowed" : "hover:bg-teal-600 cursor-pointer"
           }`
         }
       >
@@ -25,7 +25,7 @@ export default function Pagination(pageInfo: PageInfo) {
         disabled={!pageInfo.hasNextPage}
         className={
           `min-w-24 cursor-pointer px-4 py-2 bg-teal-700 text-white rounded-lg disabled:opacity-50 hover:bg-teal-600 transition-colors ${
-            !pageInfo.hasNextPage ? 'cursor-not-allowed' : 'hover:bg-teal-600 cursor-pointer'
+            !pageInfo.hasNextPage ? "cursor-not-allowed" : "hover:bg-teal-600 cursor-pointer"
           }`
         }
       >

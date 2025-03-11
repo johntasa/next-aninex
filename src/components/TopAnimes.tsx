@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useLazyQuery } from '@apollo/client';
-import { GET_TOP_ANIMES } from '@/api/queries';
-import { useSearchFilters } from '@/hooks/useSearchFilters';
-import { useEffect } from 'react';
-import AnimeList from './UI/AnimeList';
-import Loader from './UI/Loader';
+import { useLazyQuery } from "@apollo/client";
+import { GET_TOP_ANIMES } from "@/api/queries";
+import { useSearchFilters } from "@/hooks/useSearchFilters";
+import { useEffect } from "react";
+import AnimeList from "./UI/AnimeList";
+import Loader from "./UI/Loader";
 
 export default function TopAnimes() {
   const { hasActiveFilters } = useSearchFilters();

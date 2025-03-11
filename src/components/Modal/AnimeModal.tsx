@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import Image from 'next/image'
+import Image from "next/image"
 import { setSelectedAnime } from "@/redux/animeSlice"
-import { RootState } from '@/redux/store'
-import AnimeDetails from './AnimeDetails'
+import { RootState } from "@/redux/store"
+import AnimeDetails from "./AnimeDetails"
 import FavButton from "@/components/UI/SetFavButton"
-import CrossButton from '@/components/UI/CrossButton'
+import CrossButton from "@/components/UI/CrossButton"
 
 export default function AnimeModal() {
   const dispatch = useDispatch();
@@ -12,12 +12,12 @@ export default function AnimeModal() {
   const selectedAnime = useSelector((state: RootState) => {
     const anime = state.anime.selectedAnime;
     if (!anime) {
-      throw new Error('AnimeModal should not be rendered when selectedAnime is null');
+      throw new Error("AnimeModal should not be rendered when selectedAnime is null");
     }
     return anime;
   });
 
-  const cleanDescription = selectedAnime?.description.replace(/<[^>]*>?/gm, '') || '';
+  const cleanDescription = selectedAnime?.description.replace(/<[^>]*>?/gm, "") || "";
   const handleClose = () => dispatch(setSelectedAnime(null));
 
   return (
@@ -26,7 +26,7 @@ export default function AnimeModal() {
         <div className="relative w-full h-40">
           <Image 
             className="object-cover"
-            src={selectedAnime.bannerImage || '/Background.png'}
+            src={selectedAnime.bannerImage || "/Background.png"}
             fill
             alt={`${selectedAnime.title.english} Banner`}
             priority

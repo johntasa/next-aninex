@@ -1,3 +1,4 @@
+
 import { SearchFilters } from "@/interfaces/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { setAnimeList, setError, setFilters, setLoading, setPageInfo, setCurrentPage } from "@/redux/animeSlice";
@@ -5,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ANIMES } from "@/api/queries";
 import { RootState } from "@/redux/store";
 import { useEffect, useState, useCallback, useMemo } from "react";
-import debounce from 'just-debounce-it'
+import debounce from "just-debounce-it"
 
 export function useSearchFilters() {
   const { filters, currentPage } = useSelector((state: RootState) => state.anime);
@@ -40,7 +41,7 @@ export function useSearchFilters() {
     return Object.values(filterValues).some(value => value !== undefined);
   }, [queryVariables]);
 
-  useQuery(GET_ANIMES, {
+  const { loading } = useQuery(GET_ANIMES, {
     variables: queryVariables,
     skip: !hasActiveFilters,
     onCompleted: (data) => {
@@ -52,23 +53,26 @@ export function useSearchFilters() {
       dispatch(setAnimeList([]));
     }
   });
-
+  
+  const setPage = useCallback((page: number) => {
+    dispatch(setLoading(true));
+    dispatch(setCurrentPage(page));
+  }, [dispatch]);
+  
   const updateFilter = useCallback((key: keyof SearchFilters, value: string) => {
-    const filterValue = value === 'Any' ? '' : value;
+    const filterValue = value === "Any" ? "" : value;
     dispatch(setLoading(true));
     dispatch(setFilters({ ...filters, [key]: filterValue }));
     dispatch(setCurrentPage(1));
     dispatch(setAnimeList([]));
   }, [filters, dispatch]);
-
+  
   return {
     hasActiveFilters,
     filters,
     updateFilter,
     currentPage,
-    setPage: useCallback((page: number) => {
-      dispatch(setLoading(true));
-      dispatch(setCurrentPage(page));
-    }, [dispatch])
+    loading,
+    setPage,
   };
 }

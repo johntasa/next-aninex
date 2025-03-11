@@ -10,13 +10,13 @@ import Loader from '@/components/UI/Loader';
 import GoToFavsButton from '@/components/UI/GoToFavsButton';
 
 function HomeContent() {
-  const { selectedAnime, loading, error, filteredAnimes } = useSelector((state: RootState) => state.anime);
+  const { selectedAnime, loading, error, filters } = useSelector((state: RootState) => state.anime);
 
   const renderContent = () => {
     if (loading) {
       return <Loader />;
     }
-
+  
     if (error) {
       return (
         <div className="text-center py-8">
@@ -24,7 +24,9 @@ function HomeContent() {
         </div>
       );
     }
-    return filteredAnimes.length === 0 ? <TopAnimes /> : <FilteredAnimes />;
+    
+    const hasActiveFilters = Object.values(filters).some(value => value && value !== "Any");
+    return hasActiveFilters ? <FilteredAnimes /> : <TopAnimes />;
   };
 
   return (
@@ -39,7 +41,7 @@ function HomeContent() {
   );
 }
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="container mx-auto p-4 min-h-screen">
       <HomeContent />

@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Anime } from '@/interfaces/Anime';
-import { PageInfo } from '@/interfaces/PageInfo';
-import { SearchFilters } from '@/interfaces/Filters';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Anime } from "@/interfaces/Anime";
+import { PageInfo } from "@/interfaces/PageInfo";
+import { SearchFilters } from "@/interfaces/Filters";
 
 interface AnimeState {
   favorites: Anime[];
@@ -19,11 +19,11 @@ const emptyState: AnimeState = {
   favorites: [],
   selectedAnime: null,
   filters: {
-    searchTerm: '',
-    genre: '',
-    year: '',
-    status: '',
-    season: ''
+    searchTerm: "",
+    genre: "",
+    year: "",
+    status: "",
+    season: ""
   },
   filteredAnimes: [],
   loading: false,
@@ -35,21 +35,21 @@ const emptyState: AnimeState = {
     currentPage: 1,
     lastPage: 0,
     hasNextPage: false,
-    __typename: 'PageInfo'
+    __typename: "PageInfo"
   },
   currentPage: 1,
 };
 
 const loadState = (): AnimeState => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     try {
-      const serializedState = sessionStorage.getItem('animeState');
+      const serializedState = sessionStorage.getItem("animeState");
       if (serializedState === null) {
         return emptyState;
       }
       return JSON.parse(serializedState);
     } catch (err) {
-      console.error('Error loading state from sessionStorage:', err);
+      console.error("Error loading state from sessionStorage:", err);
       return emptyState;
     }
   }
@@ -57,12 +57,12 @@ const loadState = (): AnimeState => {
 };
 
 const saveState = (state: AnimeState) => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     try {
       const serializedState = JSON.stringify(state);
-      sessionStorage.setItem('animeState', serializedState);
+      sessionStorage.setItem("animeState", serializedState);
     } catch (err) {
-      console.error('Error saving state to sessionStorage:', err);
+      console.error("Error saving state to sessionStorage:", err);
     }
   }
 };
@@ -70,7 +70,7 @@ const saveState = (state: AnimeState) => {
 const initialState: AnimeState = loadState();
 
 const animeSlice = createSlice({
-  name: 'anime',
+  name: "anime",
   initialState,
   reducers: {
     addToFavorites: (state, action: PayloadAction<Anime>) => {

@@ -1,18 +1,14 @@
-import { Anime } from '@/interfaces/Anime';
-import DetailItem from './DetailItem';
+import { Anime } from "@/interfaces/Anime";
+import DetailItem from "./DetailItem";
 
-interface AnimeModalProps {
-  animeInfo: Anime
-}
-
-export default function renderAnimeDetails ({ animeInfo }: AnimeModalProps) {
+export default function AnimeDetails ({ animeInfo } : { animeInfo : Anime}) {
   const formatDate = (date: { year: number; month: number; day: number }): string => {
-    if (!date.year) return 'N/A'
-    const semiFormattedDate = `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`
-    return new Date(semiFormattedDate).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
+    if (!date.year) return "N/A"
+    const semiFormattedDate = `${date.year}-${String(date.month).padStart(2, "0")}-${String(date.day).padStart(2, "0")}`
+    return new Date(semiFormattedDate).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
     })
   }
 

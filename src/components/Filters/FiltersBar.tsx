@@ -3,19 +3,19 @@ import {
   STATUSES,
   YEARS,
   SEASONS
-} from '@/utils/constants';
-import { useSearchFilters } from '@/hooks/useSearchFilters';
-import UISelect from './UISelect';
-import { useSelector } from 'react-redux';
-import { useCallback } from 'react';
-import { RootState } from '@/redux/store';
+} from "@/utils/constants";
+import { useSearchFilters } from "@/hooks/useSearchFilters";
+import UISelect from "./UISelect";
+import { useSelector } from "react-redux";
+import { useCallback } from "react";
+import { RootState } from "@/redux/store";
 
 export default function FiltersBar() {
   const filters = useSelector((state: RootState) => state.anime.filters);
   const { updateFilter } = useSearchFilters();
 
   const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    updateFilter('searchTerm', e.target.value);
+    updateFilter("searchTerm", e.target.value);
   }, [updateFilter]);
 
   return (
