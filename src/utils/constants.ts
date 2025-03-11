@@ -4,7 +4,7 @@ export const TABS = [
 ];
 
 export const FILTERS = {
-  searchTerm: "",
+  search: "",
   genre: "",
   year: "",
   status: "",

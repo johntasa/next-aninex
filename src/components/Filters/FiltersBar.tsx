@@ -1,36 +1,71 @@
 import {
-  GENRES,
   STATUSES,
   YEARS,
   SEASONS
-} from '@/utils/constants';
-import { useSearchFilters } from '@/hooks/useSearchFilters';
-import UISelect from './UISelect';
-import { useSelector } from 'react-redux';
-import { useCallback } from 'react';
-import { RootState } from '@/redux/store';
+} from "@/utils/constants";
+import UISelect from "./UISelect";
+import { Filters } from "@/interfaces/Filters";
+import { useCallback, useState, useEffect } from "react";
+import debounce from "just-debounce-it";
 
-export default function FiltersBar() {
-  const filters = useSelector((state: RootState) => state.anime.filters);
-  const { updateFilter } = useSearchFilters();
+interface FiltersBarProps {
+  categories: string[];
+  filters: Filters;
+  onFilterChange: (filters: Filters) => void;
+}
 
-  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    updateFilter('searchTerm', e.target.value);
-  }, [updateFilter]);
+export default function FiltersBar({ categories, filters, onFilterChange }: FiltersBarProps) {
+  const [searchValue, setSearchValue] = useState(filters.search || "");
+
+  useEffect(() => {
+    setSearchValue(filters.search || "");
+  }, [filters.search]);
+
+  const debouncedSearch = useCallback(
+    debounce((value: string) => {
+      const updatedFilters: Filters = {
+        ...filters,
+        search: value,
+      };
+      onFilterChange(updatedFilters);
+    }, 500),
+    [filters, onFilterChange]
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchValue(value);
+    debouncedSearch(value);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    const updatedFilters = { ...filters } as Filters;
+    
+    if (value === "Any") {
+      delete updatedFilters[id as keyof Filters];
+    } else {
+      updatedFilters[id as keyof Filters] = value;
+    }
+    
+    onFilterChange(updatedFilters);
+  };
+
+  const genres = Array.isArray(categories) ? [...categories] : [];
 
   return (
     <div className="mt-24 mb-8">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <div>
-          <label htmlFor="searchTerm" className="block text-sm font-bold mb-1">
+          <label htmlFor="search" className="block text-sm font-bold mb-1">
             Search
           </label>
           <div className="relative">
             <input
-              id="searchTerm"
+              id="search"
               type="text"
               placeholder="Search"
-              value={filters.searchTerm}
+              value={searchValue}
               onChange={handleSearchChange}
               className="bg-white text-sm w-full p-2 pl-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"
             />
@@ -48,10 +83,35 @@ export default function FiltersBar() {
             </svg>
           </div>
         </div>
-        <UISelect id="genre" label="Genre" options={GENRES} value={filters.genre} />
-        <UISelect id="year" label="Year" options={YEARS} value={filters.year} />
-        <UISelect id="status" label="Status" options={STATUSES} value={filters.status} />
-        <UISelect id="season" label="Season" options={SEASONS} value={filters.season} />
+
+        <UISelect 
+          id="genre" 
+          label="Genre" 
+          options={genres} 
+          value={filters.genre || "Any"} 
+          handleChange={handleChange} 
+        />
+        <UISelect 
+          id="seasonYear" 
+          label="Year" 
+          options={YEARS} 
+          value={filters.seasonYear || "Any"} 
+          handleChange={handleChange} 
+        />
+        <UISelect 
+          id="status" 
+          label="Status" 
+          options={STATUSES} 
+          value={filters.status || "Any"} 
+          handleChange={handleChange} 
+        />
+        <UISelect 
+          id="season" 
+          label="Season" 
+          options={SEASONS} 
+          value={filters.season || "Any"} 
+          handleChange={handleChange} 
+        />
       </div>
     </div>
   );

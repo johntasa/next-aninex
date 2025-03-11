@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import clsx from 'clsx';
-import { TABS } from '@/utils/constants';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import { TABS } from "@/utils/constants";
 
 export default function NavLinks() {
   const pathname = usePathname();
@@ -14,12 +14,12 @@ export default function NavLinks() {
           <Link
             key={tab.name}
             href={tab.href}
-            className='relative p-1'
+            className="relative p-1"
           >
             <p className={clsx(
-              ' text-gray-300 hover:text-white sm:text-2xl',
+              " text-gray-300 hover:text-white sm:text-2xl",
               {
-                'text-white after:absolute after:bottom-0 after:left-0 after:w-full after:h-[5px] after:bg-pink-500':
+                "text-white after:absolute after:bottom-0 after:left-0 after:w-full after:h-[5px] after:bg-pink-500":
                   pathname === tab.href,
               },
             )}>

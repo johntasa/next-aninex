@@ -1,9 +1,7 @@
-interface DetailItemProps {
+export default function DetailItem ({ label, value }: {
   label: string
   value: string | number
-}
-
-export default function DetailItem ({ label, value }: DetailItemProps) {
+}) {
   return (
     <div>
       <p className="font-semibold text-gray-800">{label}</p>

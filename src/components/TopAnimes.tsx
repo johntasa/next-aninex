@@ -1,27 +1,22 @@
-'use client';
+"use client";
 
-import { useLazyQuery } from '@apollo/client';
-import { GET_TOP_ANIMES } from '@/api/queries';
-import { useSearchFilters } from '@/hooks/useSearchFilters';
-import { useEffect } from 'react';
-import AnimeList from './UI/AnimeList';
-import Loader from './UI/Loader';
+import { useLazyQuery } from "@apollo/client";
+import { GET_TOP_ANIMES } from "@/api/queries";
+import { useEffect } from "react";
+import AnimeList from "./UI/AnimeList";
+import Loader from "./UI/Loader";
 
 export default function TopAnimes() {
-  const { hasActiveFilters } = useSearchFilters();
-  
   const [getTopAnimes, { loading, error, data }] = useLazyQuery(GET_TOP_ANIMES);
 
   useEffect(() => {
-    if (!hasActiveFilters) {
-      getTopAnimes({
-        variables: {
-          season: "WINTER",
-          seasonYear: 2025,
-        }
-      });
-    }
-  }, [hasActiveFilters, getTopAnimes]);
+    getTopAnimes({
+      variables: {
+        season: "WINTER",
+        seasonYear: 2025,
+      }
+    });
+  }, [getTopAnimes]);
 
   if (loading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;

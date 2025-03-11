@@ -1,40 +1,49 @@
-'use client';
+import CrossButton from "./UI/CrossButton";
+import NoResults from "./UI/NoResultsMessage";
+import Pagination from "./UI/PaginationButtons";
+import AnimeList from "./UI/AnimeList";
+import Loader from "./UI/Loader";
+import { formatText } from "@/utils/utils";
+import { Filters } from "@/interfaces/Filters";
+import { useLazyQuery } from "@apollo/client";
+import { GET_ANIMES } from "@/api/queries";
+import { useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
-import CrossButton from './UI/CrossButton';
-import { setAnimeList, setFilters, setHasResults } from '@/redux/animeSlice';
-import NoResults from './UI/NoResultsMessage';
-import Pagination from './UI/PaginationButtons';
-import AnimeList from './UI/AnimeList';
+interface searchFilters {
+  filters: Filters,
+  handleClearFilters: (filters: Filters) => void,
+};
 
-export default function FilteredAnimes() {
-  const { filteredAnimes, hasResults, filters, pageInfo } = useSelector((state: RootState) => state.anime);
-  const dispatch = useDispatch();
+export default function FilteredAnimes({ filters, handleClearFilters }: searchFilters) {
+  const [page, setPage] = useState(1);
+  const [GetAnimes, { loading, error, data }] = useLazyQuery(GET_ANIMES);
+  
+  useEffect(() => {
+    GetAnimes({
+      variables: {page, ...filters},
+    });
+  }, [filters, GetAnimes, page]);
+
+  if (loading) return <Loader />;
+  if (error) return <p>Error: {error.message}</p>;
+  if (!data) return <Loader />;
+
+  const { media: filteredAnimes, pageInfo } = data.Page;
+  const hasResults = filteredAnimes.length > 0;
   
   const getActiveFilters = () => {
     const activeFilters = [];
-    if (filters.searchTerm) activeFilters.push(`Search: ${filters.searchTerm}`);
-    if (filters.genre && filters.genre !== 'Any') activeFilters.push(`Genre: ${filters.genre}`);
-    if (filters.year && filters.year !== 'Any') activeFilters.push(`Year: ${filters.year}`);
-    if (filters.status && filters.status !== 'Any') activeFilters.push(`Status: ${filters.status}`);
-    if (filters.season && filters.season !== 'Any') activeFilters.push(`Season: ${filters.season}`);
+    if (filters.search) activeFilters.push(`Search: ${filters.search}`);
+    if (filters.genre && filters.genre !== "Any") activeFilters.push(`Genre: ${filters.genre}`);
+    if (filters.seasonYear && filters.seasonYear !== "Any") activeFilters.push(`Year: ${filters.seasonYear}`);
+    if (filters.status && filters.status !== "Any") activeFilters.push(`Status: ${formatText(filters.status)}`);
+    if (filters.season && filters.season !== "Any") activeFilters.push(`Season: ${formatText(filters.season)}`);
     
-    return activeFilters.join(' | ');
+    return activeFilters.join(" | ");
   };
 
   const removeFilters = () => {
-    dispatch(setAnimeList([]));
-    dispatch(setHasResults(false));
-    dispatch(
-      setFilters({
-        searchTerm: '',
-        year: '',
-        genre: '',
-        status: '',
-        season: '',
-      })
-    );
+    handleClearFilters(filters);
   };
 
   return (
@@ -45,17 +54,16 @@ export default function FilteredAnimes() {
           <p>{getActiveFilters()}</p>
           <CrossButton exectFunct={removeFilters} calledFrom={"filters"} />
         </div>
-        { hasResults
-          ? (
-            <>
-              <AnimeList animes={filteredAnimes} />
-              {pageInfo.lastPage > 1 && (
-                <Pagination {...pageInfo} />
-              )}
-            </>
-          )
-          : <NoResults message={"No results for your filters"}/>
-        }
+        {loading ? (
+          <Loader />
+        ) : hasResults ? (
+          <>
+            <AnimeList animes={filteredAnimes} />
+            {pageInfo.lastPage > 1 && <Pagination pageInfo={pageInfo} setPage={setPage} />}
+          </>
+        ) : (
+          <NoResults message={"No results for your filters"} />
+        )}
       </section>
     </div>
   );

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_TOP_ANIMES = gql`
   query getTopAnimes($season: MediaSeason, $seasonYear: Int) {
@@ -51,8 +51,8 @@ export const GET_TOP_ANIMES = gql`
 `;
 
 export const GET_ANIMES = gql`
-  query GetAnimes($page: Int = 1, $search: String, $genre_in: [String], $seasonYear: Int, $season: MediaSeason, $status: MediaStatus) {
-    Page (page: $page, perPage: 20) {
+  query GetAnimes($page: Int = 1, $search: String, $genre: [String], $seasonYear: Int, $season: MediaSeason, $status: MediaStatus) {
+    Page (page: $page, perPage: 24) {
       pageInfo {
         total
         perPage
@@ -60,7 +60,7 @@ export const GET_ANIMES = gql`
         lastPage
         hasNextPage
       }
-      media(search: $search, genre_in: $genre_in, seasonYear: $seasonYear, season: $season, status: $status, type: ANIME, isAdult: false, sort: POPULARITY_DESC) {
+      media(search: $search, genre_in: $genre, seasonYear: $seasonYear, season: $season, status: $status, type: ANIME, isAdult: false, sort: POPULARITY_DESC) {
         id
         bannerImage
         coverImage {
@@ -90,5 +90,11 @@ export const GET_ANIMES = gql`
         }
       }
     }
+  }
+`;
+
+export const GET_CATEGORIES = gql`
+  query GetCategories {
+    GenreCollection
   }
 `;

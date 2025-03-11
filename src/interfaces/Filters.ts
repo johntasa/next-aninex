@@ -1,9 +1,9 @@
-export interface SearchFilters {
-  searchTerm: string;
-  genre: string;
-  year: string;
-  status: string;
-  season: string;
+export interface Filters {
+  search?: string;
+  genre?: string;
+  seasonYear?: string;
+  status?: string;
+  season?: string;
 }
 
 export interface SelectProps {
@@ -11,4 +11,5 @@ export interface SelectProps {
   label: string;
   value: string;
   options: string[];
+  handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
