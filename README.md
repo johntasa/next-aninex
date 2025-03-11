@@ -81,6 +81,8 @@ To run unit tests:
 ```bash
 pnpm test
  ```
+ 
+*Recommended extension for VSCode: [Jest Runner](https://open-vsx.org/extension/firsttris/vscode-jest-runner)*
 
 ### End-to-End Tests
 End-to-end tests are located in the e2e directory and use Playwright.

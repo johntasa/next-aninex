@@ -52,7 +52,7 @@ export const GET_TOP_ANIMES = gql`
 
 export const GET_ANIMES = gql`
   query GetAnimes($page: Int = 1, $search: String, $genre_in: [String], $seasonYear: Int, $season: MediaSeason, $status: MediaStatus) {
-    Page (page: $page, perPage: 20) {
+    Page (page: $page, perPage: 24) {
       pageInfo {
         total
         perPage
@@ -90,5 +90,11 @@ export const GET_ANIMES = gql`
         }
       }
     }
+  }
+`;
+
+export const GET_CATEGORIES = gql`
+  query GetCategories {
+    GenreCollection
   }
 `;

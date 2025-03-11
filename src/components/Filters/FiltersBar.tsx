@@ -1,5 +1,4 @@
 import {
-  GENRES,
   STATUSES,
   YEARS,
   SEASONS
@@ -10,13 +9,19 @@ import { useSelector } from "react-redux";
 import { useCallback } from "react";
 import { RootState } from "@/redux/store";
 
-export default function FiltersBar() {
+interface FiltersBarProps {
+  categories: string[];
+}
+
+export default function FiltersBar({ categories }: FiltersBarProps) {
   const filters = useSelector((state: RootState) => state.anime.filters);
   const { updateFilter } = useSearchFilters();
 
   const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     updateFilter("searchTerm", e.target.value);
   }, [updateFilter]);
+
+  const genres = Array.isArray(categories) ? [...categories] : [];
 
   return (
     <div className="mt-24 mb-8">
@@ -48,7 +53,7 @@ export default function FiltersBar() {
             </svg>
           </div>
         </div>
-        <UISelect id="genre" label="Genre" options={GENRES} value={filters.genre} />
+        <UISelect id="genre" label="Genre" options={genres} value={filters.genre} />
         <UISelect id="year" label="Year" options={YEARS} value={filters.year} />
         <UISelect id="status" label="Status" options={STATUSES} value={filters.status} />
         <UISelect id="season" label="Season" options={SEASONS} value={filters.season} />

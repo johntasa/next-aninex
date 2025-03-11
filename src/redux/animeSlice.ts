@@ -31,7 +31,7 @@ const emptyState: AnimeState = {
   hasResults: false,
   pageInfo: {
     total: 0,
-    perPage: 20,
+    perPage: 24,
     currentPage: 1,
     lastPage: 0,
     hasNextPage: false,
