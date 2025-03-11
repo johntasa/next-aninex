@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
-import { useEffect } from 'react';
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
 
 export default function URLSync() {
   const { filters, currentPage } = useSelector((state: RootState) => state.anime);
@@ -25,13 +25,13 @@ export default function URLSync() {
 
     // Update page number
     if (currentPage > 1) {
-      params.set('page', currentPage.toString());
+      params.set("page", currentPage.toString());
     } else {
-      params.delete('page');
+      params.delete("page");
     }
 
     const search = params.toString();
-    const query = search ? `?${search}` : '';
+    const query = search ? `?${search}` : "";
     const newUrl = `${pathname}${query}`;
     
     // Only update if URL actually changed

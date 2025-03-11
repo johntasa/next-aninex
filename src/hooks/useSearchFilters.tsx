@@ -40,7 +40,7 @@ export function useSearchFilters() {
     }
     
     const search = params.toString();
-    const query = search ? `?${search}` : '';
+    const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
     
     dispatch(setLoading(true));
@@ -127,9 +127,9 @@ export function useSearchFilters() {
   
   const setPage = useCallback((page: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set('page', page.toString());
+    params.set("page", page.toString());
     const search = params.toString();
-    const query = search ? `?${search}` : '';
+    const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
     
     dispatch(setLoading(true));

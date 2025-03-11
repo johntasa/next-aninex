@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_TOP_ANIMES = gql`
   query getTopAnimes($season: MediaSeason, $seasonYear: Int) {

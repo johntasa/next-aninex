@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
-import FiltersBar from '@/components/Filters/FiltersBar';
-import TopAnimes from '@/components/TopAnimes';
-import FilteredAnimes from '@/components/FilteredAnimes';
-import Loader from '@/components/UI/Loader';
-import GoToFavsButton from '@/components/UI/GoToFavsButton';
-import URLSync from '@/components/URLSync';
-import AnimeModal from '@/components/Modal/AnimeModal';
-import { useQuery } from '@apollo/client';
-import { GET_CATEGORIES } from '@/api/queries';
-import { ApolloError } from '@apollo/client';
-import { Suspense } from 'react';
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import FiltersBar from "@/components/Filters/FiltersBar";
+import TopAnimes from "@/components/TopAnimes";
+import FilteredAnimes from "@/components/FilteredAnimes";
+import Loader from "@/components/UI/Loader";
+import GoToFavsButton from "@/components/UI/GoToFavsButton";
+import URLSync from "@/components/URLSync";
+import AnimeModal from "@/components/Modal/AnimeModal";
+import { useQuery } from "@apollo/client";
+import { GET_CATEGORIES } from "@/api/queries";
+import { ApolloError } from "@apollo/client";
+import { Suspense } from "react";
 
 function HomeContent() {
   const { selectedAnime, loading: animeLoading, error: animeError, filters } = useSelector((state: RootState) => state.anime);

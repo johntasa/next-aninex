@@ -1,7 +1,7 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: 'https://graphql.anilist.co',
+  uri: "https://graphql.anilist.co",
   cache: new InMemoryCache(),
   // cache: new InMemoryCache({
   //   typePolicies: {
@@ -9,7 +9,7 @@ const client = new ApolloClient({
   //       fields: {
   //         Page: {
   //           merge: false,
-  //           keyArgs: ['type', 'sort', 'isAdult'],
+  //           keyArgs: ["type", "sort", "isAdult"],
   //         },
   //       },
   //     },
