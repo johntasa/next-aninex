@@ -8,13 +8,9 @@ export function formatText (option: string) {
 
 export function formatDate (date: { year: number; month: number; day: number }): string {
   if (!date.year) return "N/A"
-  const semiFormattedDate = `${date.year}-${String(date.month).padStart(2, "0")}-${String(date.day || 1).padStart(2, "0")}`
-  const fixedDate = new Date(semiFormattedDate)
   
-  // Add one day to the date to match test expectations
-  fixedDate.setDate(fixedDate.getDate() + 1)
-  
-  const formattedDate = fixedDate.toLocaleDateString("en-US", {
+  const semiFormattedDate = new Date(date.year, date.month - 1, date.day || 1)
+  const formattedDate = semiFormattedDate.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric"
