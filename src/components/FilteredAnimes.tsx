@@ -1,7 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import CrossButton from "./UI/CrossButton";
-import { setAnimeList, setFilters, setHasResults } from "@/redux/animeSlice";
 import NoResults from "./UI/NoResultsMessage";
 import Pagination from "./UI/PaginationButtons";
 import AnimeList from "./UI/AnimeList";
@@ -11,8 +10,7 @@ import { formatText } from "@/utils/utils";
 
 export default function FilteredAnimes() {
   const { filteredAnimes, hasResults, filters, pageInfo } = useSelector((state: RootState) => state.anime);
-  const { loading } = useSearchFilters();
-  const dispatch = useDispatch();
+  const { loading, cleanFilters } = useSearchFilters();
   
   const getActiveFilters = () => {
     const activeFilters = [];
@@ -26,17 +24,7 @@ export default function FilteredAnimes() {
   };
 
   const removeFilters = () => {
-    dispatch(setAnimeList([]));
-    dispatch(setHasResults(false));
-    dispatch(
-      setFilters({
-        searchTerm: "",
-        year: "",
-        genre: "",
-        status: "",
-        season: "",
-      })
-    );
+    cleanFilters();
   };
 
   return (
