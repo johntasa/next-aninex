@@ -37,67 +37,46 @@ describe("formatText function", () => {
   });
 });
 
-describe("formatDate function", () => {
-  const originalDate = global.Date;
-
-  afterEach(() => {
-    global.Date = originalDate;
+describe('formatDate', () => {
+  it('should return "N/A" if year is not provided', () => {
+    expect(formatDate({ year: 0, month: 5, day: 15 })).toBe('N/A');
+    expect(formatDate({ year: null as unknown as number, month: 5, day: 15 })).toBe('N/A');
   });
 
-  it("should return 'N/A' when year is not provided", () => {
-    const date = { year: 0, month: 5, day: 15 };
-    expect(formatDate(date)).toBe("N/A");
+  it('should format date with day provided', () => {
+    const result = formatDate({ year: 2023, month: 5, day: 15 });
+    expect(result).toBe('May 15, 2023');
   });
 
-  it("should format date correctly with day provided", () => {
-    const date = { year: 2023, month: 5, day: 15 };
-    
-    const mockDate = new originalDate("2023-05-16T00:00:00Z");
-    global.Date = jest.fn(() => mockDate) as unknown as DateConstructor;
-    mockDate.setDate = jest.fn();
-    mockDate.getDate = jest.fn(() => 15);
-    mockDate.toLocaleDateString = jest.fn(() => "May 16, 2023");
-    
-    expect(formatDate(date)).toBe("May 16, 2023");
-    expect(mockDate.setDate).toHaveBeenCalledWith(16);
+  it('should format date without day (month and year only)', () => {
+    const result = formatDate({ year: 2023, month: 5, day: null as unknown as number });
+    expect(result).toBe('May, 2023');
   });
 
-  it("should format date correctly without day provided", () => {
-    const date = { year: 2023, month: 5, day: 0 };
-    
-    const mockDate = new originalDate("2023-05-02T00:00:00Z");
-    global.Date = jest.fn(() => mockDate) as unknown as DateConstructor;
-    mockDate.setDate = jest.fn();
-    mockDate.getDate = jest.fn(() => 1);
-    mockDate.toLocaleDateString = jest.fn(() => "May 1, 2023");
-    
-    expect(formatDate(date)).toBe("May, 2023");
-    expect(mockDate.setDate).toHaveBeenCalledWith(2);
+  it('should handle January correctly', () => {
+    const result = formatDate({ year: 2023, month: 1, day: 15 });
+    expect(result).toBe('Jan 15, 2023');
   });
 
-  it("should pad month and day with leading zeros", () => {
-    const date = { year: 2023, month: 1, day: 2 };
-    
-    const originalDateConstructor = global.Date;
-    const mockDateConstructor = jest.fn((dateString) => {
-      expect(dateString).toBe("2023-01-02");
-      return new originalDateConstructor(dateString);
-    });
-    global.Date = mockDateConstructor as unknown as DateConstructor;
-    formatDate(date);
-    expect(mockDateConstructor).toHaveBeenCalledWith("2023-01-02");
-    global.Date = originalDateConstructor;
+  it('should handle December correctly', () => {
+    const result = formatDate({ year: 2023, month: 12, day: 25 });
+    expect(result).toBe('Dec 25, 2023');
   });
 
-  // it("should handle February 29 in leap years correctly", () => {
-  //   const date = { year: 2020, month: 2, day: 29 };
-  //   const result = formatDate(date);
-  //   expect(result).toMatch(/Mar 1, 2020/);
-  // });
+  it('should handle leap year date', () => {
+    const result = formatDate({ year: 2024, month: 2, day: 29 });
+    expect(result).toBe('Feb 29, 2024');
+  });
 
-  // it("should handle month rollover correctly", () => {
-  //   const date = { year: 2023, month: 12, day: 31 };
-  //   const result = formatDate(date);
-  //   expect(result).toMatch(/Jan 1, 2024/);
-  // });
+  it('should handle month-only format for all months', () => {
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    
+    for (let i = 1; i <= 12; i++) {
+      const result = formatDate({ year: 2023, month: i, day: 0 });
+      expect(result).toBe(`${months[i-1]}, 2023`);
+    }
+  });
 });

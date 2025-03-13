@@ -18,10 +18,14 @@ jest.mock("@/utils/constants", () => ({
 
 jest.mock("./UISelect", () => ({
   __esModule: true,
-  default: ({ id, label, options, value }: { id: string; label: string; options: Array<{ value: string; label: string }>; value: string }) => (
+  default: ({ id, label, options, value, onChange }: { id: string; label: string; options: Array<{ value: string; label: string }>; value: string; onChange?: (value: string) => void }) => (
     <div data-testid={`ui-select-${id}`}>
       <label htmlFor={id}>{label}</label>
-      <select id={id} value={value}>
+      <select 
+        id={id} 
+        value={value} 
+        onChange={e => onChange && onChange(e.target.value)}
+      >
         {options.map(option => (
           <option key={option.value} value={option.value}>{option.label}</option>
         ))}
@@ -59,7 +63,7 @@ describe("FiltersBar Component", () => {
     
     render(
       <Provider store={store}>
-        <FiltersBar />
+        <FiltersBar categories={[]} />
       </Provider>
     );
     
@@ -88,7 +92,7 @@ describe("FiltersBar Component", () => {
     
     render(
       <Provider store={store}>
-        <FiltersBar />
+        <FiltersBar categories={[]} />
       </Provider>
     );
     
@@ -113,7 +117,7 @@ describe("FiltersBar Component", () => {
     
     render(
       <Provider store={store}>
-        <FiltersBar />
+        <FiltersBar categories={[]} />
       </Provider>
     );
     
@@ -140,7 +144,7 @@ describe("FiltersBar Component", () => {
     
     render(
       <Provider store={store}>
-        <FiltersBar />
+        <FiltersBar categories={[]} />
       </Provider>
     );
     
@@ -166,7 +170,7 @@ describe("FiltersBar Component", () => {
     
     render(
       <Provider store={store}>
-        <FiltersBar />
+        <FiltersBar categories={[]}/>
       </Provider>
     );
     
