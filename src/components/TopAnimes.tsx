@@ -9,7 +9,6 @@ import Loader from "./UI/Loader";
 
 export default function TopAnimes() {
   const { hasActiveFilters } = useSearchFilters();
-  
   const [getTopAnimes, { loading, error, data }] = useLazyQuery(GET_TOP_ANIMES);
 
   useEffect(() => {

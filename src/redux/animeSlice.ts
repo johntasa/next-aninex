@@ -43,13 +43,13 @@ const emptyState: AnimeState = {
 const loadState = (): AnimeState => {
   if (typeof window !== "undefined") {
     try {
-      const serializedState = sessionStorage.getItem("animeState");
+      const serializedState = localStorage.getItem("animeState");
       if (serializedState === null) {
         return emptyState;
       }
       return JSON.parse(serializedState);
     } catch (err) {
-      console.error("Error loading state from sessionStorage:", err);
+      console.error("Error loading state from localStorage:", err);
       return emptyState;
     }
   }
@@ -60,9 +60,9 @@ const saveState = (state: AnimeState) => {
   if (typeof window !== "undefined") {
     try {
       const serializedState = JSON.stringify(state);
-      sessionStorage.setItem("animeState", serializedState);
+      localStorage.setItem("animeState", serializedState);
     } catch (err) {
-      console.error("Error saving state to sessionStorage:", err);
+      console.error("Error saving state to localStorage:", err);
     }
   }
 };
