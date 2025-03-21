@@ -3,7 +3,7 @@ import Image from "next/image"
 import { setSelectedAnime } from "@/redux/animeSlice"
 import { RootState } from "@/redux/store"
 import AnimeDetails from "./AnimeDetails"
-import FavButton from "@/components/UI/SetFavButton"
+import FavButton from "@/components/UI/FavButton"
 import CrossButton from "@/components/UI/CrossButton"
 
 export default function AnimeModal() {

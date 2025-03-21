@@ -3,37 +3,7 @@ export const TABS = [
   { name: "Favorites", href: "/favorites"}
 ];
 
-export const FILTERS = {
-  search: "",
-  genre: "",
-  year: "",
-  status: "",
-  season: "",
-};
-
-export const GENRES = [
-  "Action",
-  "Adventure",
-  "Comedy",
-  "Drama",
-  "Ecchi",
-  "Fantasy",
-  "Hentai",
-  "Horror",
-  "Mahou Shoujo",
-  "Mecha",
-  "Music",
-  "Mystery",
-  "Psychological",
-  "Romance",
-  "Sci-Fi",
-  "Slice of Life",
-  "Sports",
-  "Supernatural",
-  "Thriller"
-];
-
-export const YEARS = Array.from({ length: 30 }, (_, i) => (new Date().getFullYear() - i).toString());
+export const YEARS = Array.from({ length: 50 }, (_, i) => (new Date().getFullYear() - i).toString());
 
 export enum Status {
   FINISHED = "FINISHED",
@@ -52,3 +22,13 @@ export enum Season {
 
 export const STATUSES = Object.values(Status);
 export const SEASONS = Object.values(Season);
+
+export const CURRENT_SEASON = (() => {
+  const month = new Date().getMonth() + 1;
+  if (month >= 1 && month <= 3) return Season.WINTER;
+  if (month >= 4 && month <= 6) return Season.SPRING;
+  if (month >= 7 && month <= 9) return Season.SUMMER;
+  return Season.FALL;
+})();
+
+export const CURRENT_YEAR = YEARS[0];

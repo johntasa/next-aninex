@@ -4,15 +4,14 @@ import FilteredAnimes from './FilteredAnimes';
 import { GET_ANIMES } from '@/api/queries';
 import { Filters } from '@/interfaces/Filters';
 
-// Mock the child components
 jest.mock('./UI/CrossButton', () => {
   return function MockCrossButton({ exectFunct, calledFrom }: { exectFunct: () => void, calledFrom: string }) {
     return <button data-testid="cross-button" onClick={exectFunct}>Clear {calledFrom}</button>;
   };
 });
 
-jest.mock('./UI/NoResultsMessage', () => {
-  return function MockNoResults({ message }: { message: string }) {
+jest.mock('./UI/NoResults', () => {
+  return function MockNoResults({ message }: { message: string }) {      
     return <div data-testid="no-results">{message}</div>;
   };
 });
@@ -27,7 +26,7 @@ interface PageInfo {
 interface AnimeItem {
   id: string;
   title: {
-    romaji: string;
+    native: string;
   };
 }
 
@@ -49,7 +48,7 @@ jest.mock('./UI/AnimeList', () => {
       <div data-testid="anime-list">
         {animes.map(anime => (
           <div key={anime.id} data-testid="anime-item">
-            {anime.title.romaji}
+            {anime.title.native}
           </div>
         ))}
       </div>
@@ -88,8 +87,8 @@ describe('FilteredAnimes', () => {
         data: {
           Page: {
             media: [
-              { id: '1', title: { romaji: 'Anime 1' } },
-              { id: '2', title: { romaji: 'Anime 2' } }
+              { id: '1', title: { native: 'Anime 1' }, episodes: 12, averageScore: 80, status: 'FINISHED', startDate: '2020-01-01', endDate: '2020-12-31', trailer: null },
+              { id: '2', title: { native: 'Anime 2' }, episodes: 24, averageScore: 85, status: 'RELEASING', startDate: '2020-01-01', endDate: '2020-12-31', trailer: null }
             ],
             pageInfo: {
               currentPage: 1,
@@ -236,8 +235,8 @@ describe('FilteredAnimes', () => {
             data: {
               Page: {
                 media: [
-                  { id: '3', title: { romaji: 'Anime 3' } },
-                  { id: '4', title: { romaji: 'Anime 4' } }
+                  { id: '3', title: { native: 'Anime 3' } },
+                  { id: '4', title: { native: 'Anime 4' } }
                 ],
                 pageInfo: {
                   currentPage: 2,
