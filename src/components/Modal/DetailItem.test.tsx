@@ -6,15 +6,15 @@ describe("DetailItem", () => {
   it("should render label and string value correctly", () => {
     render(<DetailItem label="Status" value="Ongoing" />);
     
-    expect(screen.getByText("Status")).toBeInTheDocument();
-    expect(screen.getByText("Ongoing")).toBeInTheDocument();
+    expect(screen.getByText("Status")).toBeDefined();
+    expect(screen.getByText("Ongoing")).toBeDefined();
   });
 
   it("should render label and number value correctly", () => {
     render(<DetailItem label="Episodes" value={24} />);
     
-    expect(screen.getByText("Episodes")).toBeInTheDocument();
-    expect(screen.getByText("24")).toBeInTheDocument();
+    expect(screen.getByText("Episodes")).toBeDefined();
+    expect(screen.getByText("24")).toBeDefined();
   });
 
   it("should render with correct CSS classes", () => {
@@ -23,14 +23,14 @@ describe("DetailItem", () => {
     const labelElement = screen.getByText("Status");
     const valueElement = screen.getByText("Ongoing");
     
-    expect(labelElement).toHaveClass("font-semibold", "text-gray-800");
-    expect(valueElement).toHaveClass("text-gray-600");
+    expect(labelElement.className).toContain("font-semibold text-gray-800");
+    expect(valueElement.className).toContain("text-gray-600");
   });
 
   it("should render zero as a valid number value", () => {
     render(<DetailItem label="Count" value={0} />);
     
-    expect(screen.getByText("Count")).toBeInTheDocument();
-    expect(screen.getByText("0")).toBeInTheDocument();
+    expect(screen.getByText("Count")).toBeDefined();
+    expect(screen.getByText("0")).toBeDefined();
   });
 });

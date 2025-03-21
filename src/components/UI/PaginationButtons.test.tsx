@@ -21,9 +21,10 @@ describe('Pagination', () => {
 
     render(<Pagination pageInfo={pageInfo} setPage={mockSetPage} />);
 
-    expect(screen.getByText('Page 2 of 5')).toBeInTheDocument();
-    expect(screen.getByText('Previous')).toBeInTheDocument();
-    expect(screen.getByText('Next')).toBeInTheDocument();
+    const pageText = screen.getByText('Page 2 of 5');
+    expect(pageText).toBeTruthy();
+    expect(screen.getByText('Previous')).toBeTruthy();
+    expect(screen.getByText('Next')).toBeTruthy();
   });
 
   it('disables Previous button on first page', () => {
@@ -40,7 +41,7 @@ describe('Pagination', () => {
 
     const previousButton = screen.getByText('Previous');
     expect(previousButton).toBeDisabled();
-    expect(previousButton).toHaveClass('cursor-not-allowed');
+    expect(previousButton.className).toContain('cursor-not-allowed');
   });
 
   it('disables Next button on last page', () => {
@@ -57,7 +58,7 @@ describe('Pagination', () => {
 
     const nextButton = screen.getByText('Next');
     expect(nextButton).toBeDisabled();
-    expect(nextButton).toHaveClass('cursor-not-allowed');
+    expect(nextButton.className).toContain('cursor-not-allowed');
   });
 
   it('calls setPage with previous page number when Previous button is clicked', () => {
@@ -113,7 +114,7 @@ describe('Pagination', () => {
     
     expect(previousButton).not.toBeDisabled();
     expect(nextButton).not.toBeDisabled();
-    expect(previousButton).not.toHaveClass('cursor-not-allowed');
-    expect(nextButton).not.toHaveClass('cursor-not-allowed');
+    expect(previousButton.className).not.toContain('cursor-not-allowed');
+    expect(nextButton.className).not.toContain('cursor-not-allowed');
   });
 });

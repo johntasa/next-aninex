@@ -3,7 +3,7 @@ import Image from "next/image"
 import { setSelectedAnime } from "@/redux/animeSlice"
 import { RootState } from "@/redux/store"
 import AnimeDetails from "./AnimeDetails"
-import FavButton from "@/components/UI/SetFavButton"
+import FavButton from "@/components/UI/FavButton"
 import CrossButton from "@/components/UI/CrossButton"
 
 export default function AnimeModal() {
@@ -39,7 +39,7 @@ export default function AnimeModal() {
               <h2 className="text-xl sm:text-2xl md:text-3xl mb-2">{selectedAnime.title.english}</h2>
               <h3 className="text-lg sm:text-xl md:text-2xl">{selectedAnime.title.native}</h3>
             </div>
-            <FavButton animeInfo={selectedAnime} size={50} />
+            <FavButton animeInfo={selectedAnime} size={56} />
           </div>
           <p className="my-4 sm:my-6 text-sm md:text-base text-justify leading-relaxed line-clamp-4 max-h-36 overflow-hidden">{cleanDescription}</p>
           <AnimeDetails animeInfo={selectedAnime} />

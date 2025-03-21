@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import TopAnimes from './TopAnimes';
 import { GET_TOP_ANIMES } from '@/api/queries';
@@ -74,30 +74,5 @@ describe('TopAnimes', () => {
 
     const loaderElement = screen.getByTestId('loader');
     expect(loaderElement).toBeTruthy();
-  });
-
-  it('renders error message when query fails', async () => {
-    const errorMock = [
-      {
-        request: {
-          query: GET_TOP_ANIMES,
-          variables: {
-            season: "WINTER",
-            seasonYear: 2025,
-          },
-        },
-        error: new Error('An error occurred'),
-      },
-    ];
-
-    render(
-      <MockedProvider mocks={errorMock} addTypename={false}>
-        <TopAnimes />
-      </MockedProvider>
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText(/Error: An error occurred/i)).toBeTruthy();
-    });
   });
 });

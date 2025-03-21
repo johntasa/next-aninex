@@ -5,6 +5,7 @@ import { GET_TOP_ANIMES } from "@/api/queries";
 import { useEffect } from "react";
 import AnimeList from "./UI/AnimeList";
 import Loader from "./UI/Loader";
+import { CURRENT_SEASON, CURRENT_YEAR } from "@/utils/constants";
 
 export default function TopAnimes() {
   const [getTopAnimes, { loading, error, data }] = useLazyQuery(GET_TOP_ANIMES);
@@ -12,8 +13,8 @@ export default function TopAnimes() {
   useEffect(() => {
     getTopAnimes({
       variables: {
-        season: "WINTER",
-        seasonYear: 2025,
+        season: CURRENT_SEASON,
+        seasonYear: CURRENT_YEAR,
       }
     });
   }, [getTopAnimes]);

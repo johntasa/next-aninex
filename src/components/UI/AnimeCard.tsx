@@ -2,7 +2,7 @@ import Image from "next/image";
 import { AnimeCardProps } from "@/interfaces/Anime";
 import { useDispatch } from "react-redux";
 import { setSelectedAnime } from "@/redux/animeSlice";
-import FavButton from "@/components/UI/SetFavButton";
+import FavButton from "@/components/UI/FavButton";
 
 export default function AnimeCard({ animeInfo }: AnimeCardProps) {
   const dispatch = useDispatch();

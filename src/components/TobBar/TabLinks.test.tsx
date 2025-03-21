@@ -27,7 +27,7 @@ describe("NavLinks", () => {
     render(<NavLinks />);
     
     TABS.forEach(tab => {
-      expect(screen.getByText(tab.name)).toBeInTheDocument();
+      expect(screen.getByText(tab.name)).toBeTruthy();
     });
   });
 
@@ -38,8 +38,8 @@ describe("NavLinks", () => {
     render(<NavLinks />);
     
     const activeElement = screen.getByText(activeTab.name);
-    expect(activeElement).toHaveClass("text-white");
-    expect(activeElement.closest("a")).toBeInTheDocument();
+    expect(activeElement.classList.contains("text-white")).toBe(true);
+    expect(activeElement.closest("a")).not.toBeNull();
   });
 
   it("should not highlight inactive tabs", () => {
@@ -50,8 +50,8 @@ describe("NavLinks", () => {
     render(<NavLinks />);
     
     const inactiveElement = screen.getByText(inactiveTab.name);
-    expect(inactiveElement).toHaveClass("text-gray-300");
-    expect(inactiveElement).not.toHaveClass("text-white");
+    expect(inactiveElement.classList.contains("text-gray-300")).toBe(true);
+    expect(inactiveElement.classList.contains("text-white")).toBe(false);
   });
 
   it("should render all tabs with correct href attributes", () => {
@@ -61,7 +61,7 @@ describe("NavLinks", () => {
     
     TABS.forEach(tab => {
       const link = screen.getByText(tab.name).closest("a");
-      expect(link).toHaveAttribute("href", tab.href);
+      expect(link?.getAttribute("href")).toBe(tab.href);
     });
   });
 
@@ -72,7 +72,7 @@ describe("NavLinks", () => {
     
     TABS.forEach(tab => {
       const element = screen.getByText(tab.name);
-      expect(element).toHaveClass("hover:text-white");
+      expect(element.className).toContain("hover:text-white");
     });
   });
 });

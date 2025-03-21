@@ -7,6 +7,7 @@ import "./globals.css";
 import Topbar from "@/components/TobBar/Topbar";
 import { Provider } from "react-redux";
 import store from "@/redux/store";
+import GoToFavsButton from "@/components/UI/GoToFavsButton";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
           <Provider store={store}>
             <Topbar />
             <main className="h-lvh">{children}</main>
+            <GoToFavsButton />
           </Provider>
         </ApolloProvider>
       </body>

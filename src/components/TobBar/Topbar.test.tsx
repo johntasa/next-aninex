@@ -15,7 +15,7 @@ describe("Topbar", () => {
     render(<Topbar />);
     
     const titleElement = screen.getByText("ANINEX");
-    expect(titleElement).toBeInTheDocument();
+    expect(titleElement).toBeTruthy();
     expect(titleElement.tagName).toBe("H1");
   });
 
@@ -23,13 +23,14 @@ describe("Topbar", () => {
     render(<Topbar />);
     
     const titleElement = screen.getByText("ANINEX");
-    expect(titleElement).toHaveClass("text-xl", "font-bold", "sm:text-4xl", "cursor-default");
+    expect(titleElement.className).toContain("text-xl font-bold sm:text-4xl cursor-default");
   });
 
   it("should render the TabLinks component", () => {
     render(<Topbar />);
     
-    expect(screen.getByTestId("tab-links")).toBeInTheDocument();
+    const tabLinks = screen.getByTestId("tab-links");
+    expect(tabLinks).toBeTruthy();
   });
 
   it("should have fixed positioning and correct background", () => {

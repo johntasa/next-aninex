@@ -2,7 +2,6 @@ import { SelectProps } from "@/interfaces/Filters";
 import { formatText } from "@/utils/utils";
 
 export default function UISelect({id, label, value, options, handleChange}: SelectProps) {
-
   return (
     <div>
       <label htmlFor={id} className="block text-sm font-bold mb-1">

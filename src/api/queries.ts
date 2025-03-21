@@ -93,8 +93,8 @@ export const GET_ANIMES = gql`
   }
 `;
 
-export const GET_CATEGORIES = gql`
-  query GetCategories {
+export const GET_GENRES = gql`
+  query GetGenres {
     GenreCollection
   }
 `;

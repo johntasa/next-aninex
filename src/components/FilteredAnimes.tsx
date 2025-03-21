@@ -1,5 +1,7 @@
+"use client";
+
 import CrossButton from "./UI/CrossButton";
-import NoResults from "./UI/NoResultsMessage";
+import NoResults from "./UI/NoResults";
 import Pagination from "./UI/PaginationButtons";
 import AnimeList from "./UI/AnimeList";
 import Loader from "./UI/Loader";

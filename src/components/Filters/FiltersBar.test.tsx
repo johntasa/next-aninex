@@ -9,7 +9,7 @@ jest.mock('just-debounce-it', () => {
 });
 
 describe('FiltersBar', () => {
-  const mockCategories = ['Action', 'Comedy', 'Drama'];
+  const mockGenres = ['Action', 'Comedy', 'Drama'];
   const mockFilters: Filters = {
     search: 'test search',
     genre: 'Action',
@@ -26,7 +26,7 @@ describe('FiltersBar', () => {
   it('renders all filter components correctly', () => {
     render(
       <FiltersBar 
-        categories={mockCategories} 
+        genres={mockGenres} 
         filters={mockFilters} 
         onFilterChange={mockOnFilterChange} 
       />
@@ -45,7 +45,7 @@ describe('FiltersBar', () => {
   it('handles search input changes', async () => {
     render(
       <FiltersBar 
-        categories={mockCategories} 
+        genres={mockGenres} 
         filters={{}} 
         onFilterChange={mockOnFilterChange} 
       />
@@ -62,7 +62,7 @@ describe('FiltersBar', () => {
   it('handles select changes', () => {
     render(
       <FiltersBar 
-        categories={mockCategories} 
+        genres={mockGenres} 
         filters={{}} 
         onFilterChange={mockOnFilterChange} 
       />
@@ -79,7 +79,7 @@ describe('FiltersBar', () => {
   it('removes filter when "Any" is selected', () => {
     render(
       <FiltersBar 
-        categories={mockCategories} 
+        genres={mockGenres} 
         filters={mockFilters} 
         onFilterChange={mockOnFilterChange} 
       />
@@ -95,7 +95,7 @@ describe('FiltersBar', () => {
   it('updates search value when filters prop changes', () => {
     const { rerender } = render(
       <FiltersBar 
-        categories={mockCategories} 
+        genres={mockGenres} 
         filters={{ search: 'initial' }} 
         onFilterChange={mockOnFilterChange} 
       />
@@ -106,7 +106,7 @@ describe('FiltersBar', () => {
 
     rerender(
       <FiltersBar 
-        categories={mockCategories} 
+        genres={mockGenres} 
         filters={{ search: 'updated' }} 
         onFilterChange={mockOnFilterChange} 
       />
@@ -118,7 +118,7 @@ describe('FiltersBar', () => {
   it('handles empty categories array', () => {
     render(
       <FiltersBar 
-        categories={[]} 
+        genres={[]} 
         filters={{}} 
         onFilterChange={mockOnFilterChange} 
       />
