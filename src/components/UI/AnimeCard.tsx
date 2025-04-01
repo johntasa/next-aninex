@@ -14,7 +14,7 @@ export default function AnimeCard({ animeInfo }: AnimeCardProps) {
           alt={animeInfo.title.english || "Cover image of anime"}
           fill
           loading="lazy"
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 40vw, 50vw"
           className="object-cover rounded-lg shadow-teal-500 shadow-lg hover:blur-sm transition-all duration-300 cursor-pointer"
           onClick={() => dispatch(setSelectedAnime(animeInfo))}
         />

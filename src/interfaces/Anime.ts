@@ -26,6 +26,7 @@ export interface Anime {
     id: string;
     site: string;
   };
+  genres: string[];
 }
 
 export interface AnimeCardProps {

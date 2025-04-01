@@ -47,6 +47,7 @@ export const GET_TOP_ANIMES = gql`
       id
       site
     }
+    genres
   }
 `;
 
@@ -88,6 +89,7 @@ export const GET_ANIMES = gql`
           id
           site
         }
+        genres
       }
     }
   }

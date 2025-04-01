@@ -23,7 +23,7 @@ export default function AnimeModal() {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 p-2 sm:p-4 z-50">
       <div className="relative bg-white rounded-lg w-full sm:w-11/12 md:w-3/4 xl:w-3/6 max-h-[80vh] sm:max-h-[90vh] overflow-y-auto">
-        <div className="relative w-full h-40">
+        <div className="relative w-full h-50">
           <Image 
             className="object-cover"
             src={selectedAnime.bannerImage || "/Background.png"}
